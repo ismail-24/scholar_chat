@@ -6,7 +6,10 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      backgroundColor: Color(0xff2B475E),
+      body: Column(
+        children: [],
+      ),
     );
   }
 }
