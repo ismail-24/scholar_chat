@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAbD4PHDoVkxW1EZRbxGi7pBhS1C69hzws</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1011122957384</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.scholarChat.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>scholar-chat-24</string>
+	<key>STORAGE_BUCKET</key>
+	<string>scholar-chat-24.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1011122957384:ios:44548238bb2e63bb043c7d</string>
+</dict>
+</plist>
