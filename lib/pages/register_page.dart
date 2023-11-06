@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:scholar_chat/constants.dart';
+import 'package:scholar_chat/helper/show_snack_bar.dart';
+import 'package:scholar_chat/pages/chat_page.dart';
 import 'package:scholar_chat/widgets/custom_button.dart';
 import 'package:scholar_chat/widgets/custom_text_field.dart';
 
@@ -38,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 100,
                 ),
                 Image.asset(
-                  'assets/images/scholar.png',
+                  kLogo,
                   height: 150,
                 ),
                 Row(
@@ -71,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                CustomTextField(
+                CustomFormTextField(
                   onChange: (data) {
                     email = data;
                   },
@@ -80,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                CustomTextField(
+                CustomFormTextField(
                     onChange: (data) {
                       password = data;
                     },
@@ -95,8 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       isLoading = true;
                       try {
                         await registerUser();
-                        showSnackBar(context, 'success');
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, ChatPage.id);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
                           showSnackBar(context, 'weak password');
@@ -139,14 +140,6 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
       ),
     );
   }
