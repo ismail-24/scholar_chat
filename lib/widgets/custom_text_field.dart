@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({super.key, this.hintText});
+  CustomTextField({this.onChange, super.key, this.hintText});
+  Function(String)? onChange;
   String? hintText;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (data) {
+        if (data!.isEmpty) {
+          return 'field is required';
+        }
+      },
+      onChanged: onChange,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
