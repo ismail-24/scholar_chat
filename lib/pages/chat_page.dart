@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scholar_chat/constants.dart';
+import 'package:scholar_chat/widgets/chat_buble.dart';
 
 class ChatPage extends StatelessWidget {
   static String id = 'ChatPage';
@@ -16,15 +17,37 @@ class ChatPage extends StatelessWidget {
               kLogo,
               height: 50,
             ),
-            Text('Scholar Chat'),
+            Text('Chat'),
           ],
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: kPrimaryColor,
-        ),
-        child: Text('i\'m an user'),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(itemBuilder: (context, index) {
+              return ChatBuble();
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Send Message',
+                suffixIcon: Icon(
+                  Icons.send,
+                  color: kPrimaryColor,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(color: kPrimaryColor),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
