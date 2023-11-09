@@ -6,15 +6,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatPage extends StatelessWidget {
   static String id = 'ChatPage';
+
   CollectionReference messages =
       FirebaseFirestore.instance.collection(kMessagesCollection);
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController messageController = TextEditingController();
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments;
+
     return StreamBuilder<QuerySnapshot>(
-      stream: messages.orderBy(kCreatedAt).snapshots(),
+      stream: messages.orderBy(kCreatedAt, descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Message> messagesList = [];
@@ -44,25 +48,40 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
+                      reverse: true,
+                      controller: scrollController,
+                      physics: BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics(),
+                      ),
                       itemCount: messagesList.length,
                       itemBuilder: (context, index) {
-                        return ChatBuble(
-                          message: messagesList[index],
-                        );
+                        return messagesList[index].id == email
+                            ? ChatBuble(
+                                message: messagesList[index],
+                              )
+                            : ChatBubleForFriend(
+                                message: messagesList[index],
+                              );
                       }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: TextField(
-                    controller: controller,
+                    controller: messageController,
                     onSubmitted: (data) {
                       messages.add(
                         {
                           kMessage: data,
                           kCreatedAt: DateTime.now(),
+                          'id': email,
                         },
                       );
-                      controller.clear();
+                      messageController.clear();
+                      scrollController.animateTo(
+                        0,
+                        duration: Duration(microseconds: 300),
+                        curve: Curves.easeIn,
+                      );
                     },
                     decoration: InputDecoration(
                       hintText: 'Send Message',
