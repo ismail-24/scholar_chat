@@ -8,15 +8,8 @@ import 'package:scholar_chat/pages/register_page.dart';
 import 'package:scholar_chat/widgets/custom_button.dart';
 import 'package:scholar_chat/widgets/custom_text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+class LoginPage extends StatelessWidget {
   static String id = 'LoginPage';
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
@@ -35,14 +28,14 @@ class _LoginPageState extends State<LoginPage> {
             key: formKey,
             child: ListView(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Image.asset(
                   kLogo,
                   height: 150,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -55,10 +48,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       'LOGIN',
@@ -92,7 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                 CustomButton(
                   onTap: () async {
                     if (formKey.currentState!.validate()) {
-                      setState(() {});
                       isLoading = true;
                       try {
                         await loginUser();
@@ -108,7 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                         showSnackBar(context, 'there was an error');
                       }
                       isLoading = false;
-                      setState(() {});
                     } else {}
                   },
                   text: 'LOGIN',
@@ -119,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'don\'t have an account?',
                       style: TextStyle(
                         color: Colors.white,
@@ -129,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         Navigator.pushNamed(context, RegisterPage.id);
                       },
-                      child: Text(
+                      child: const Text(
                         ' Register',
                         style: TextStyle(color: Color(0xffC7EDE6)),
                       ),
@@ -142,10 +133,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  Future<void> loginUser() async {
-    UserCredential user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email!, password: password!);
   }
 }
